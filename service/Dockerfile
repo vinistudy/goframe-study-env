@@ -1,6 +1,6 @@
 FROM ubuntu:24.04
 
-RUN apt-get update && apt-get install wget git vim ca-certificates -y && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y wget git vim ca-certificates && rm -rf /var/lib/apt/lists/*
 
 ARG GO_VERSION=1.25.1
 
