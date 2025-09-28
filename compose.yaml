@@ -1,0 +1,12 @@
+services:
+  go:
+    build:
+      context: ./service
+      dockerfile: Dockerfile
+    image: holovision-goframe:1.0
+    container_name: go-env
+    restart: unless-stopped
+    volumes:
+      - ./app:/app
+    command: ['tail', '-f', '/dev/null']
+
