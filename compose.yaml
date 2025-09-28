@@ -4,9 +4,32 @@ services:
       context: ./service
       dockerfile: Dockerfile
     image: holovision-goframe:1.0
-    container_name: go-env
+    container_name: goframe-env
     restart: unless-stopped
+    ports:
+      - 8000:8000
     volumes:
       - ./app:/app
-    command: ['tail', '-f', '/dev/null']
-
+    command: ["tail", "-f", "/dev/null"]
+    networks:
+      - goframe-net
+  etcd:
+    image: bitnami/etcd:3.5
+    container_name: goframe-etcd
+    restart: unless-stopped
+    ports:
+      - 2379:2379
+    environment:
+      - TZ=Asia/Shanghai
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
+    networks:
+      - goframe-net
+      - ycsjnet
+networks:
+  goframe-net:
+    name: goframe-net
+    driver: bridge
+  ycsjnet:
+    name: ycsjnet
+    external: true
