@@ -13,6 +13,7 @@ services:
     command: ["tail", "-f", "/dev/null"]
     networks:
       - goframe-net
+      - ycsjnet
   etcd:
     image: bitnami/etcd:3.5
     container_name: goframe-etcd

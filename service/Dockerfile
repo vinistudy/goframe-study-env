@@ -11,10 +11,12 @@ RUN wget https://golang.google.cn/dl/${GO_TAR} -O /tmp/${GO_TAR} && \
     tar -C /usr/local -xzf /tmp/${GO_TAR} && \
     rm /tmp/${GO_TAR}
 
-ENV PATH=$PATH:/usr/local/go/bin
+ENV PATH=$PATH:/usr/local/go/bin:/go/bin
 ENV GOPATH=/go
 
-RUN go env -w GO111MODULE=on && go env -w GOPROXY=https://goproxy.cn,direct && go env -w GOSUMDB=sum.golang.google.cn
+RUN go env -w GO111MODULE=on && \
+    go env -w GOPROXY=https://goproxy.cn,direct && \
+    go env -w GOSUMDB=sum.golang.google.cn
 
 RUN wget -O gf https://github.com/gogf/gf/releases/latest/download/gf_$(go env GOOS)_$(go env GOARCH) && chmod +x gf && ./gf install -y && rm ./gf
 
