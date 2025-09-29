@@ -8,6 +8,9 @@ services:
     restart: unless-stopped
     ports:
       - 8000:8000
+      - 32001:32001
+      - 32002:32002
+      - 32003:32003
     volumes:
       - ./app:/app
     command: ["tail", "-f", "/dev/null"]
